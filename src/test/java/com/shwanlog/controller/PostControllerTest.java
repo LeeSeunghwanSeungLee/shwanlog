@@ -28,5 +28,23 @@ class PostControllerTest {
                 .andExpect(content().string("Hello World"))
                 .andDo(print());
     }
+
+    @Test
+    @DisplayName("/posts 요청시 타이틀이 없는 경우.")
+    void test_2() throws Exception {
+        mockMvc.perform(post("/posts")
+                        .content("{\"title\": \"\", \"content\": \"내용입니다.\"}"))
+                .andExpect(status().isBadRequest())
+                .andDo(print());
+    }
+
+    @Test
+    @DisplayName("/posts 요청시 컨텐츠가 없는 경우.")
+    void test_3() throws Exception {
+        mockMvc.perform(post("/posts")
+                        .content("{\"title\": \"제목입니다.\", \"content\": \"\"}"))
+                .andExpect(status().isBadRequest())
+                .andDo(print());
+    }
 }
 
