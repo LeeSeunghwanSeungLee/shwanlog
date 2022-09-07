@@ -23,7 +23,8 @@ class PostControllerTest {
     @DisplayName("/posts 요청시 Hello World 출력")
     void test_1() throws Exception {
         mockMvc.perform(post("/posts")
-                .content("{\"title\": \"제목입니다.\", \"content\": \"내용입니다.\"}"))
+                .content("{\"title\": \"제목입니다.\", \"content\": \"내용입니다.\"}")
+                .contentType("application/json"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Hello World"))
                 .andDo(print());
@@ -33,7 +34,8 @@ class PostControllerTest {
     @DisplayName("/posts 요청시 타이틀이 없는 경우.")
     void test_2() throws Exception {
         mockMvc.perform(post("/posts")
-                        .content("{\"title\": \"\", \"content\": \"내용입니다.\"}"))
+                .content("{\"title\": \"\", \"content\": \"내용입니다.\"}")
+                .contentType("application/json"))
                 .andExpect(status().isBadRequest())
                 .andDo(print());
     }
@@ -42,7 +44,8 @@ class PostControllerTest {
     @DisplayName("/posts 요청시 컨텐츠가 없는 경우.")
     void test_3() throws Exception {
         mockMvc.perform(post("/posts")
-                        .content("{\"title\": \"제목입니다.\", \"content\": \"\"}"))
+                .content("{\"title\": \"제목입니다.\", \"content\": \"\"}")
+                .contentType("application/json"))
                 .andExpect(status().isBadRequest())
                 .andDo(print());
     }
