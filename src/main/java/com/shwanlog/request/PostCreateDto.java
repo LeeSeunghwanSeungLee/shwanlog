@@ -9,7 +9,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class PostCreate {
+public class PostCreateDto {
     private String title;
     private String content;
 }

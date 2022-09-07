@@ -1,6 +1,6 @@
 package com.shwanlog.controller;
 
-import com.shwanlog.request.PostCreate;
+import com.shwanlog.request.PostCreateDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class PostController {
     @PostMapping("/posts")
-    public String get(@ModelAttribute PostCreate postCreate) {
-        log.info("posts cards = {}", postCreate);
+    public String get(@ModelAttribute PostCreateDto postCreateDto) {
         return "Hello World";
     }
 }
