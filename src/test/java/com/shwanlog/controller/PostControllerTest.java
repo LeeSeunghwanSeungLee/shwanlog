@@ -41,7 +41,7 @@ class PostControllerTest {
     @Test
     @DisplayName("/posts 요청시 Hello World 출력")
     void test_1() throws Exception {
-        PostCreateDto postCreateDto = new PostCreateDto().builder()
+        PostCreateDto postCreateDto = PostCreateDto.builder()
                 .title("제목입니다.")
                 .content("내용입니다.")
                 .build();
@@ -58,7 +58,7 @@ class PostControllerTest {
     @Test
     @DisplayName("/posts 요청시 타이틀이 없는 경우.")
     void test_2() throws Exception {
-        PostCreateDto postCreateDto = new PostCreateDto().builder()
+        PostCreateDto postCreateDto = PostCreateDto.builder()
                 .content("내용입니다.")
                 .build();
         String inputValue = this.objectMapper.writeValueAsString(postCreateDto);
@@ -73,7 +73,7 @@ class PostControllerTest {
     @Test
     @DisplayName("/posts 요청시 컨텐츠가 없는 경우.")
     void test_3() throws Exception {
-        PostCreateDto postCreateDto = new PostCreateDto().builder()
+        PostCreateDto postCreateDto = PostCreateDto.builder()
                 .title("제목입니다.")
                 .build();
         String inputValue = this.objectMapper.writeValueAsString(postCreateDto);
@@ -88,7 +88,7 @@ class PostControllerTest {
     @Test
     @DisplayName("/posts 요청시 db에 데이터가 저장된다.")
     void test_4() throws Exception {
-        PostCreateDto postCreateDto = new PostCreateDto().builder()
+        PostCreateDto postCreateDto = PostCreateDto.builder()
                 .title("제목입니다.")
                 .content("내용입니다.")
                 .build();
