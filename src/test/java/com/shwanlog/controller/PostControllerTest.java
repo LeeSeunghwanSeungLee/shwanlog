@@ -1,19 +1,31 @@
 package com.shwanlog.controller;
 
+import com.shwanlog.domain.Post;
+import com.shwanlog.repository.PostRepository;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureWebMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(PostController.class)
+@AutoConfigureMockMvc
+@SpringBootTest
 class PostControllerTest {
     @Autowired
     private MockMvc mockMvc;
+
+    @Autowired
+    private PostRepository postRepository;
 
     @Test
     @DisplayName("/posts 요청시 Hello World 출력")
@@ -44,6 +56,19 @@ class PostControllerTest {
                 .contentType("application/json"))
                 .andExpect(status().isBadRequest())
                 .andDo(print());
+    }
+
+    @Test
+    @DisplayName("/posts 요청시 db에 데이터가 저장된다.")
+    void test_4() throws Exception {
+        mockMvc.perform(post("/posts")
+                        .content("{\"title\": \"제목입니다.\", \"content\": \"내용입니다.\"}")
+                        .contentType("application/json"))
+                .andExpect(status().isOk())
+                .andDo(print());
+
+        List<Post> postList = postRepository.findAll();
+        Assertions.assertThat(postList.size()).isEqualTo(1);
     }
 }
 
