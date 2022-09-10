@@ -3,6 +3,7 @@ package com.shwanlog.controller;
 import com.shwanlog.domain.Post;
 import com.shwanlog.repository.PostRepository;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,11 @@ class PostControllerTest {
 
     @Autowired
     private PostRepository postRepository;
+
+    @BeforeEach
+    void reset() {
+        this.postRepository.deleteAll();
+    }
 
     @Test
     @DisplayName("/posts 요청시 Hello World 출력")
