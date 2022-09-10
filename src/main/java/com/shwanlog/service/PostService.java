@@ -15,8 +15,10 @@ public class PostService {
     private final PostRepository postRepository;
 
     public void write(PostCreateDto postCreateDto) {
-        log.info("service layer = {}", postCreateDto.toString());
-        Post post = new Post(postCreateDto.getTitle(), postCreateDto.getContent());
+        Post post = Post.builder()
+                        .title(postCreateDto.getTitle())
+                        .content(postCreateDto.getContent())
+                        .build();
         log.info("saved data = {}", post);
         this.postRepository.save(post);
     }
