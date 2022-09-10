@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureWebMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -38,7 +39,7 @@ class PostControllerTest {
     void test_1() throws Exception {
         mockMvc.perform(post("/posts")
                 .content("{\"title\": \"제목입니다.\", \"content\": \"내용입니다.\"}")
-                .contentType("application/json"))
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Hello World"))
                 .andDo(print());
@@ -49,7 +50,7 @@ class PostControllerTest {
     void test_2() throws Exception {
         mockMvc.perform(post("/posts")
                 .content("{\"title\": \"\", \"content\": \"내용입니다.\"}")
-                .contentType("application/json"))
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
                 .andDo(print());
     }
@@ -59,7 +60,7 @@ class PostControllerTest {
     void test_3() throws Exception {
         mockMvc.perform(post("/posts")
                 .content("{\"title\": \"제목입니다.\", \"content\": \"\"}")
-                .contentType("application/json"))
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
                 .andDo(print());
     }
