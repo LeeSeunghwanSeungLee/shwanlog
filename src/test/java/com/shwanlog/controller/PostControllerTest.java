@@ -31,7 +31,8 @@ class PostControllerTest {
     @Autowired
     private PostRepository postRepository;
 
-    private ObjectMapper objectMapper = new ObjectMapper();
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @BeforeEach
     void reset() {
