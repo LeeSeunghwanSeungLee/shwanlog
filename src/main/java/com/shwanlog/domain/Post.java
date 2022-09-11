@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @ToString
+@Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class Post {
