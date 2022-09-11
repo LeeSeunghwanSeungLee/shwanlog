@@ -37,4 +37,15 @@ public class PostService {
                             .build();
                 }).collect(Collectors.toList());
     }
+
+    public PostResponseDto get(Long id) {
+        Post post = this.postRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("조회 되지 않는 id값을 요청하였습니다."));
+
+        return PostResponseDto.builder()
+                .id(post.getId())
+                .title(post.getTitle())
+                .content(post.getContent())
+                .build();
+    }
 }
