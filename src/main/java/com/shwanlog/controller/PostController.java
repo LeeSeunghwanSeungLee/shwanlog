@@ -1,6 +1,7 @@
 package com.shwanlog.controller;
 
 import com.shwanlog.request.PostCreateDto;
+import com.shwanlog.response.PostResponseDto;
 import com.shwanlog.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,9 +16,15 @@ public class PostController {
     private final PostService postService;
 
     @PostMapping("/posts")
-    public String get(@RequestBody @Valid PostCreateDto postCreateDto) {
+    public String postNewPosting(@RequestBody @Valid PostCreateDto postCreateDto) {
         log.info("data = {}", postCreateDto.toString());
         this.postService.write(postCreateDto);
         return "Hello World";
+    }
+
+    @GetMapping("/posts/{id}")
+    @ResponseBody
+    public PostResponseDto getPosting(@PathVariable Long id) {
+        return this.postService.get(id);
     }
 }
