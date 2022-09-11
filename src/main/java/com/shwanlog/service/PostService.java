@@ -3,12 +3,14 @@ package com.shwanlog.service;
 import com.shwanlog.domain.Post;
 import com.shwanlog.repository.PostRepository;
 import com.shwanlog.request.PostCreateDto;
+import com.shwanlog.response.PostResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @AllArgsConstructor
@@ -25,7 +27,14 @@ public class PostService {
         this.postRepository.save(post);
     }
 
-    public List<Post> findAll() {
-        return this.postRepository.findAll();
+    public List<PostResponseDto> findAll() {
+        List<Post> postList = this.postRepository.findAll();
+        return postList.stream().map((post) -> {
+                    return PostResponseDto.builder()
+                            .id(post.getId())
+                            .title(post.getTitle())
+                            .content(post.getContent())
+                            .build();
+                }).collect(Collectors.toList());
     }
 }

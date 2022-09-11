@@ -2,6 +2,7 @@ package com.shwanlog.service;
 
 import com.shwanlog.domain.Post;
 import com.shwanlog.request.PostCreateDto;
+import com.shwanlog.response.PostResponseDto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,7 +33,7 @@ class PostServiceTest {
         postService.write(postCreateDto);
 
         // then
-        List<Post> result = postService.findAll();
+        List<PostResponseDto> result = postService.findAll();
         assertThat(result.size()).isEqualTo(1);
         assertThat(result.get(0).getId()).isEqualTo(1L);
         assertThat(result.get(0).getTitle()).isEqualTo("제목_1");
