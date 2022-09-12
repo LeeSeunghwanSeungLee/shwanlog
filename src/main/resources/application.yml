@@ -1,0 +1,28 @@
+# Spring ??
+spring:
+  web:
+    locale: ko_KR
+    resources:
+      add-mappings: false
+#  messages:
+#    basename: message/messages
+  # 404(Not Found) ?? ? throw ??? ???
+  mvc:
+    throw-exception-if-no-handler-found: true
+
+  h2:
+    console:
+      enabled: true                            # h2 콘솔 사용
+      path: /h2                                    # localhost:port/h2 로 접근 가능
+      settings:
+        trace: false                        # Print additional trace information
+        web-allow-others: true    # 브라우저로 접근가능하게 하기
+    profiles:
+      active: local
+    # H2 메모리 DB를 위한 설정
+    datasource:
+      driver-class-name: org.h2.Driver
+      url: jdbc:h2:mem:userdb;DB_CLOSE_DELAY=-1 # userdb 스키마에 mem인 메모리 데이터 베이스로 동작
+      username: sa
+      password:
+      sql-script-encoding: utf-8
